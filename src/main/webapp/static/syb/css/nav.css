@@ -1,0 +1,331 @@
+﻿@charset "utf-8";
+* {
+    margin: 0;
+    padding: 0;
+    list-style-type: none;
+}
+
+a, img {
+    border: 0;
+}
+
+body {
+    line-height: 2em;
+    background-color: #ffffff;
+    font-family: 微软雅黑;
+    color: #666666;
+    font-size: 18px;
+    min-width: 1250px;
+}
+
+a {
+    color: #666666;
+    text-decoration: none;
+    -webkit-transition-property: color;
+    -moz-transition-property: color;
+    -o-transition-property: color;
+    transition-property: color;
+    -webkit-transition-duration: .2s;
+    -webkit-transition-timing-function: ease-in;
+    -moz-transition-duration: .2s;
+    -moz-transition-timing-function: ease-in;
+    -o-transition-duration: .2s;
+    -o-transition-timing-function: ease-in;
+    transition-duration: .2s;
+    transition-timing-function: ease-in
+}
+
+a:hover {
+    color: black;
+    text-decoration: none
+}
+
+a:visited {
+
+    text-decoration: none
+}
+
+a:link {
+    color: black;
+    text-decoration: none
+}
+
+/* hc_lnav */
+.hc_lnav {
+    z-index: 1000;
+    position: relative;
+    width: 255px;
+    margin: 0px;
+}
+
+.hc_lnav .allbtn {
+    z-index: 1000;
+    position: relative;
+
+
+}
+
+.hc_lnav .allbtn h2 {
+    font-size: 18px;
+    box-shadow: 2px 0px 6px -3px #f6563b;
+    -webkit-box-shadow: 2px 0px 6px -3px #f6563b;
+    -moz-box-shadow: 2px 0px 6px -3px #f6563b;
+    margin-top: 0px;
+
+}
+
+.hc_lnav .allbtn h2 a {
+    line-height: 40px;
+    background-color: #f6563b;
+    /*padding-left: 10px;*/
+    width: 255px;
+    display: block;
+    font-family: 微软雅黑;
+    height: 40px;
+    color: #ffffff;
+    font-size: 18px;
+    font-weight: normal;
+    text-align: center;
+    vertical-align: middle;
+}
+
+.hc_lnav .allbtn h2 a:hover {
+    background-color: #f6563b;
+    text-decoration: none
+}
+
+.hc_lnav .allbtn h2 i {
+}
+
+.hc_lnav .allbtn h2 strong {
+}
+
+/*一级导航隐藏*/
+.hc_lnav .allbtn ul {
+    z-index: 99999;
+    position: absolute;
+    background-color: whitesmoke;
+    width: 255px;
+    height: 400px;
+    top: 40px;
+    left: 0px;
+    opacity: 1;
+    border-top: solid 1px #d2d2d2;
+    border-left: solid 1px #d2d2d2;
+    border-bottom: solid 1px #d2d2d2;
+}
+
+.hc_lnav .allbtn .display {
+    display: none;
+}
+
+body.hc_home .hc_lnav .allbtn ul {
+    display: block
+}
+
+body.hc_list .hc_lnav .allbtn ul {
+    display: block
+}
+
+.hc_lnav .allbtn ul li {
+    padding-bottom: 0px;
+    zoom: 1;
+    clear: both;
+    cursor: default
+}
+
+.hc_lnav .allbtn ul li .tx {
+
+    line-height: 79.5px;
+
+    background-repeat: no-repeat;
+    background-position: right center;
+    height: 79.5px;
+    _background-image: none;
+    text-align: left;
+    vertical-align: middle;
+    border-top: solid #FFFFFF thin;
+}
+
+.hc_lnav .allbtn ul li .tx a {
+    font-family: 微软雅黑;
+    color: #f6563b;
+    font-size: 18px;
+    -webkit-transition: color 0.1s ease-out 0s;
+    -moz-transition: color 0.1s ease-out 0s;
+    -ms-transition: color 0.1s ease-out 0s;
+    -o-transition: color 0.1s ease-out 0s;
+    transition: color 0.1s ease-out 0s;
+    margin-left: -10px;
+}
+
+.hc_lnav .allbtn ul li .tx a i {
+    line-height: 25px;
+    margin-top: 5px;
+    width: 25px;
+    background-position: 0px 0px;
+    float: left;
+    height: 25px;
+    margin-right: 0px;
+    text-decoration: none
+}
+
+.hc_lnav .allbtn ul li dl {
+    zoom: 1;
+    color: #ffffff;
+    clear: both;
+    overflow: auto;
+    padding-top: 4px
+}
+
+.hc_lnav .allbtn ul li dl a {
+    line-height: 22px;
+    white-space: nowrap;
+    float: left;
+    color: #FFFFFF;
+    margin-left: 10px;
+    margin-right: 0px;
+    -webkit-transition: color 0.1s ease-out 0s;
+    -moz-transition: color 0.1s ease-out 0s;
+    -ms-transition: color 0.1s ease-out 0s;
+    -o-transition: color 0.1s ease-out 0s;
+    transition: color 0.1s ease-out 0s
+}
+
+.hc_lnav .allbtn ul li dt {
+    padding-left: 10px;
+    width: 30px;
+    float: left;
+    padding-top: 1px
+}
+
+.hc_lnav .allbtn ul li dd {
+    line-height: 22px;
+    width: 150px;
+    float: left;
+    padding-top: 2px
+}
+
+/*二级导航隐藏*/
+.hc_lnav .allbtn ul li .pop {
+    position: absolute;
+    border-left: medium none;
+    margin-left: -1px;
+
+    padding-bottom: 10px;
+    background-color: rgba(255, 255, 255, 1);
+border-right: solid 0.2px #96a9b5;
+border-bottom: solid 0.2px #96a9b5;
+    min-height: 399px;
+    padding-left: 30px;
+    /*TODO*/
+    width: 730px;
+    padding-right: 0px;
+    display: none;
+    height: 399px;
+    border-top: medium none;
+    top: 0px;
+    padding-top: 10px;
+    left: 255px;
+
+
+}
+
+.hc_lnav .allbtn ul li .pop h3 {
+    display: none;
+    font-size: 18px
+}
+
+.hc_lnav .allbtn ul li .pop dl {
+    padding-bottom: 6px;
+    color: black;
+    padding-top: 6px;
+
+}
+
+/*.hc_lnav .allbtn ul li .pop dl:hover {*/
+/*background-color: red;*/
+/*}*/
+
+.hc_lnav .allbtn ul li .pop dl a {
+    color: black;
+    margin: 0px 18px 18px 18px;
+}
+
+.hc_lnav .allbtn ul li .pop dl a.un {
+    color: #f6563b;
+}
+
+.hc_lnav .allbtn ul li .pop dt {
+    padding-left: 0px;
+    width: 100px;
+    font-weight: 500;
+}
+
+.hc_lnav .allbtn ul li .pop dd {
+    width: 555px;
+    margin-left: 12px;
+
+}
+
+.hc_lnav .allbtn ul li .pop .act {
+    /*TODO*/
+    width: 730px;
+    height: 100px;
+    overflow: hidden;
+    padding-top: 10px
+}
+
+.hc_lnav .allbtn:hover ul {
+    display: block
+}
+
+/*控制一级菜单显示隐藏*/
+.hc_lnav .allbtn ul li:hover {
+    background-color: #fcfcfc;
+    opacity: 1;
+    color: black;
+}
+
+.hc_lnav .allbtn ul li:hover .tx {
+    background-color: white;
+}
+
+.hc_lnav .allbtn ul li:hover .tx a {
+    color: black;
+}
+
+.hc_lnav .allbtn ul li:hover .tx a i {
+    background-position: 0px -25px
+}
+
+.hc_lnav .allbtn ul li:hover .pop {
+    display: block;
+    top: 0px;
+    left: 255px
+}
+
+/*控制二级菜单显示隐藏*/
+.hc_lnav .allbtn ul li:hover .pop dl a.un {
+    color: white;
+    text-decoration: none;
+    opacity: 1;
+
+}
+
+.hc_lnav .allbtn ul li:hover dl {
+    color: #f6563b;
+}
+
+.hc_lnav .allbtn ul li:hover a {
+    color: black;
+}
+
+.hc_lnav .allbtn ul li:hover a:hover {
+    color: black;
+}
+
+.hc_lnav .allbtn ul li .pop dd a:hover {
+    color: #f6563b;
+
+}

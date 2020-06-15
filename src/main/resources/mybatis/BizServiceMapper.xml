@@ -1,0 +1,311 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.greathammer.dao.BizServiceMapper">
+  <resultMap id="BaseResultMap" type="com.greathammer.entity.BizService">
+    <id column="id" property="id" jdbcType="INTEGER"/>
+    <result column="category_id" property="categoryId" jdbcType="INTEGER"/>
+    <result column="provider_id" property="providerId" jdbcType="INTEGER"/>
+    <result column="name" property="name" jdbcType="VARCHAR"/>
+    <result column="old_price" property="oldPrice" jdbcType="VARCHAR"/>
+    <result column="new_price" property="newPrice" jdbcType="VARCHAR"/>
+    <result column="unit" property="unit" jdbcType="VARCHAR"/>
+    <result column="info" property="info" jdbcType="VARCHAR"/>
+    <result column="is_pay" property="isPay" jdbcType="BIT"/>
+    <result column="label_time" property="labelTime" jdbcType="VARCHAR"/>
+    <result column="label_category" property="labelCategory" jdbcType="VARCHAR"/>
+    <result column="cdate" property="cdate" jdbcType="TIMESTAMP"/>
+    <result column="udate" property="udate" jdbcType="TIMESTAMP"/>
+    <result column="status" property="status" jdbcType="INTEGER"/>
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.greathammer.entity.BizServiceWithBLOBs" extends="BaseResultMap">
+    <result column="logo" property="logo" jdbcType="VARCHAR"/>
+    <result column="service_content" property="serviceContent" jdbcType="LONGVARCHAR"/>
+    <result column="service_process" property="serviceProcess" jdbcType="LONGVARCHAR"/>
+    <result column="service_promise" property="servicePromise" jdbcType="LONGVARCHAR"/>
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, category_id, provider_id, name, old_price, new_price, unit, info, is_pay, label_time, 
+    label_category, cdate, udate, status
+  </sql>
+  <sql id="Blob_Column_List">
+    logo, service_content, service_process, service_promise
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Integer">
+    select
+    <include refid="Base_Column_List"/>
+    ,
+    <include refid="Blob_Column_List"/>
+    from biz_service
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <select id="selectServiceByLabel" parameterType="string" resultMap="ResultMapWithBLOBs">
+    SELECT
+    <include refid="Base_Column_List"/>
+    ,
+    <include refid="Blob_Column_List"/>
+    FROM biz_service
+    WHERE label_category = #{label,jdbcType=VARCHAR}
+    LIMIT 4
+  </select>
+
+  <select id="loadInfo" parameterType="int" resultType="map">
+    SELECT
+    `bc`.`id`,
+    `bc`.`name`,
+    `bc`.`info`,
+    `bc`.`logo`,
+    `bc`.`cdate`,
+    `bc`.`udate`,
+    `bc`.`status`,
+    `bs`.`category_id`,
+    `bs`.`provider_id`,
+    `bs`.`name`,
+    `bs`.`old_price`,
+    `bs`.`new_price`,
+    `bs`.`unit`,
+    `bs`.`logo`,
+    `bs`.`info`,
+    `bs`.`service_content`,
+    `bs`.`service_process`,
+    `bs`.`service_promise`,
+    `bs`.`is_pay`,
+    `bs`.`label_time`,
+    `bs`.`label_category`,
+    `bs`.`cdate`,
+    `bs`.`udate`,
+    `bs`.`status`
+    FROM
+    `syb`.`biz_category` AS bc
+    RIGHT JOIN
+    `syb`.`biz_service` AS bs ON bc.id = bs.category_id
+    WHERE bs.category_id = #{id}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from biz_service
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.greathammer.entity.BizServiceWithBLOBs">
+    insert into biz_service (id, category_id, provider_id, 
+      name, old_price, new_price, 
+      unit, info, is_pay, label_time, 
+      label_category, cdate, udate, 
+      status, logo, service_content, 
+      service_process, service_promise)
+    values (#{id,jdbcType=INTEGER}, #{categoryId,jdbcType=INTEGER}, #{providerId,jdbcType=INTEGER}, 
+      #{name,jdbcType=VARCHAR}, #{oldPrice,jdbcType=VARCHAR}, #{newPrice,jdbcType=VARCHAR}, 
+      #{unit,jdbcType=VARCHAR}, #{info,jdbcType=VARCHAR}, #{isPay,jdbcType=BIT}, #{labelTime,jdbcType=VARCHAR}, 
+      #{labelCategory,jdbcType=VARCHAR}, #{cdate,jdbcType=TIMESTAMP}, #{udate,jdbcType=TIMESTAMP}, 
+      #{status,jdbcType=INTEGER}, #{logo,jdbcType=LONGVARCHAR}, #{serviceContent,jdbcType=LONGVARCHAR}, 
+      #{serviceProcess,jdbcType=LONGVARCHAR}, #{servicePromise,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.greathammer.entity.BizServiceWithBLOBs">
+    insert into biz_service
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="categoryId != null">
+        category_id,
+      </if>
+      <if test="providerId != null">
+        provider_id,
+      </if>
+      <if test="name != null">
+        name,
+      </if>
+      <if test="oldPrice != null">
+        old_price,
+      </if>
+      <if test="newPrice != null">
+        new_price,
+      </if>
+      <if test="unit != null">
+        unit,
+      </if>
+      <if test="info != null">
+        info,
+      </if>
+      <if test="isPay != null">
+        is_pay,
+      </if>
+      <if test="labelTime != null">
+        label_time,
+      </if>
+      <if test="labelCategory != null">
+        label_category,
+      </if>
+      <if test="cdate != null">
+        cdate,
+      </if>
+      <if test="udate != null">
+        udate,
+      </if>
+      <if test="status != null">
+        status,
+      </if>
+      <if test="logo != null">
+        logo,
+      </if>
+      <if test="serviceContent != null">
+        service_content,
+      </if>
+      <if test="serviceProcess != null">
+        service_process,
+      </if>
+      <if test="servicePromise != null">
+        service_promise,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="categoryId != null">
+        #{categoryId,jdbcType=INTEGER},
+      </if>
+      <if test="providerId != null">
+        #{providerId,jdbcType=INTEGER},
+      </if>
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="oldPrice != null">
+        #{oldPrice,jdbcType=VARCHAR},
+      </if>
+      <if test="newPrice != null">
+        #{newPrice,jdbcType=VARCHAR},
+      </if>
+      <if test="unit != null">
+        #{unit,jdbcType=VARCHAR},
+      </if>
+      <if test="info != null">
+        #{info,jdbcType=VARCHAR},
+      </if>
+      <if test="isPay != null">
+        #{isPay,jdbcType=BIT},
+      </if>
+      <if test="labelTime != null">
+        #{labelTime,jdbcType=VARCHAR},
+      </if>
+      <if test="labelCategory != null">
+        #{labelCategory,jdbcType=VARCHAR},
+      </if>
+      <if test="cdate != null">
+        #{cdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="udate != null">
+        #{udate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=INTEGER},
+      </if>
+      <if test="logo != null">
+        #{logo,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="serviceContent != null">
+        #{serviceContent,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="serviceProcess != null">
+        #{serviceProcess,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="servicePromise != null">
+        #{servicePromise,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.greathammer.entity.BizServiceWithBLOBs">
+    update biz_service
+    <set>
+      <if test="categoryId != null">
+        category_id = #{categoryId,jdbcType=INTEGER},
+      </if>
+      <if test="providerId != null">
+        provider_id = #{providerId,jdbcType=INTEGER},
+      </if>
+      <if test="name != null">
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="oldPrice != null">
+        old_price = #{oldPrice,jdbcType=VARCHAR},
+      </if>
+      <if test="newPrice != null">
+        new_price = #{newPrice,jdbcType=VARCHAR},
+      </if>
+      <if test="unit != null">
+        unit = #{unit,jdbcType=VARCHAR},
+      </if>
+      <if test="info != null">
+        info = #{info,jdbcType=VARCHAR},
+      </if>
+      <if test="isPay != null">
+        is_pay = #{isPay,jdbcType=BIT},
+      </if>
+      <if test="labelTime != null">
+        label_time = #{labelTime,jdbcType=VARCHAR},
+      </if>
+      <if test="labelCategory != null">
+        label_category = #{labelCategory,jdbcType=VARCHAR},
+      </if>
+      <if test="cdate != null">
+        cdate = #{cdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="udate != null">
+        udate = #{udate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="status != null">
+        status = #{status,jdbcType=INTEGER},
+      </if>
+      <if test="logo != null">
+        logo = #{logo,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="serviceContent != null">
+        service_content = #{serviceContent,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="serviceProcess != null">
+        service_process = #{serviceProcess,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="servicePromise != null">
+        service_promise = #{servicePromise,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.greathammer.entity.BizServiceWithBLOBs">
+    update biz_service
+    set category_id = #{categoryId,jdbcType=INTEGER},
+      provider_id = #{providerId,jdbcType=INTEGER},
+      name = #{name,jdbcType=VARCHAR},
+      old_price = #{oldPrice,jdbcType=VARCHAR},
+      new_price = #{newPrice,jdbcType=VARCHAR},
+      unit = #{unit,jdbcType=VARCHAR},
+      info = #{info,jdbcType=VARCHAR},
+      is_pay = #{isPay,jdbcType=BIT},
+      label_time = #{labelTime,jdbcType=VARCHAR},
+      label_category = #{labelCategory,jdbcType=VARCHAR},
+      cdate = #{cdate,jdbcType=TIMESTAMP},
+      udate = #{udate,jdbcType=TIMESTAMP},
+      status = #{status,jdbcType=INTEGER},
+      logo = #{logo,jdbcType=LONGVARCHAR},
+      service_content = #{serviceContent,jdbcType=LONGVARCHAR},
+      service_process = #{serviceProcess,jdbcType=LONGVARCHAR},
+      service_promise = #{servicePromise,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.greathammer.entity.BizService">
+    update biz_service
+    set category_id = #{categoryId,jdbcType=INTEGER},
+      provider_id = #{providerId,jdbcType=INTEGER},
+      name = #{name,jdbcType=VARCHAR},
+      old_price = #{oldPrice,jdbcType=VARCHAR},
+      new_price = #{newPrice,jdbcType=VARCHAR},
+      unit = #{unit,jdbcType=VARCHAR},
+      info = #{info,jdbcType=VARCHAR},
+      is_pay = #{isPay,jdbcType=BIT},
+      label_time = #{labelTime,jdbcType=VARCHAR},
+      label_category = #{labelCategory,jdbcType=VARCHAR},
+      cdate = #{cdate,jdbcType=TIMESTAMP},
+      udate = #{udate,jdbcType=TIMESTAMP},
+      status = #{status,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>
